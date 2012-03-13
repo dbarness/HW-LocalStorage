@@ -14,6 +14,32 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
 	<link rel="stylesheet" href="normalize.css" media="screen" />
+	<link rel="stylesheet" href="styles.css" />
+	
+	<style type="text/css">
+		body {
+			background: url(bkg.jpg) 0 0 repeat;
+		}
+		input:invalid {
+			border: 1px solid #f00;
+		}
+
+		input ~ span:after {
+			content: attr(title);
+			color: #f00;
+			margin-left: 4px;
+			opacity: 0;
+		}
+
+		input:invalid ~ span:after {
+			opacity: 1;
+		}
+
+		input:valid {
+			border: 1px solid #0f0;
+		}
+
+	</style>
 
 	<script src="modernizr-2.5.3.js"></script>
 </head>
@@ -24,71 +50,106 @@
 		<h1>Vigilante Application</h1>
 		<h2>2012 rev. #1b75</h2>
 	</header>
-
+	
 	<section>
 		<form>
 			<fieldset>
-				<legend>Personal Information</legend>
-
+				<h3>Personal Information</h3>
+				<ul>
+				<li>
 				<label for="name">Name</label>
-				<input type="text" name="name" id="name" />
-
+				<input type="text" name="name" id="name" required />
+				</li>
+				<li>
 				<label for="age">Age</label>
-				<input type="number" name="age" id="age" />
-
+				<input type="number" name="age" id="age" placeholder="28" required />
+				</li>
+				<li>
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email" />
-
+				<input type="email" name="email" id="email" placeholder="bruce@email.com" required pattern="^([a-zA-Z0-9_\-\.]+)@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})"/>
+				</li>
+				<li>
 				<label for="dayjob">Day Job</label>
-				<input type="text" name="dayjob" id="dayjob" />
-
+				<input type="text" name="dayjob" id="dayjob" required />
+				</li>
+				<li>
 				<label for="startdate">Start Date</label>
-				<input type="date" name="startdate" id="startdate" />
-
+				<input type="date" name="startdate" id="startdate" placeholder="YYYY-MM-DD" required required pattern="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"/>
+				</li>
+				<li>
 				<label for="blogurl">Blog URL</label>
-				<input type="url" name="blogurl" id="blogurl" />
+				<input type="url" name="blogurl" id="blogurl" placeholder="http://imbatman.com" required required pattern="/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/" />
+				</li>
+				</ul>
 			</fieldset>
 
 			<fieldset>
-				<legend>Vigilante Details</legend>
-
+				<h3>Vigilante Details</h3>
+				<ul>
+				<li>
 				<label for="vigilantename">Name</label>
-				<input type="text" name="vigilantename" id="vigilantename" />
-
+				<input type="text" name="vigilantename" id="vigilantename" required />
+				</li>
+				<li>
 				<label for="symbol">Symbol</label>
-				<input type="text" name="symbol" id="symbol" />
-
+				<input type="text" name="symbol" id="symbol" required />
+				</li>
+				<li>
 				<label for="primarycolor">Primary Color</label>
 				<input type="color" name="primarycolor" id="primarycolor" />
-
+				</li>
+				<li>
 				<label for="motivations">Motivations</label>
-				<select name="motivations" id="motivations" multiple size="8">
+				<select name="motivations" id="motivations" multiple size="8" required>
 					<option value="parentskilled">Parents Killed In Front Me</option>
+					<option value="layedoff">Got Layed Off At Work</option>
+					<option value="bored">Bored</option>
+					<option value="dressup">Like To Dress Up</option>
+					<option value="curruptsystem">Currupt Justice System</option>
+					<option value="vengeance">Seeking Vengeance</option>
+					<option value="rageoutlet">Need An Outlet For My Rage</option>
+					<option value="notsure">Not  Sure</option>
 					<!-- create at least 7 more vigilante motivations. must stay a multi-select. -->
 				</select>
-
+				</li>
+				<li>
 				<label for="weapon">Weapon of Choice</label>
-				<select name="weapon" id="weapon">
-					<option value=""></option>
+				<select name="weapon" id="weapon" required>
+					<option value="gun">Gun</option>
 					<option value="fists">Bare Fists</option>
+					<option value="marbles">Marbles</option>
+					<option value="slingshot">Slingshot</option>
+					<option value="badbreath">Bad Breath</option>
+					<option value="knives">Knives</option>
+					<option value="acid">Acid</option>
+					<option value="other">Other</option>
 					<!-- create at least 7 more weapon options. must stay a single select. -->
 				</select>
-
+				</li>
+				<li>
 				<label for="reason">Why Should We Choose You?</label>
-				<textarea name="reason" id="reason"></textarea>
+				<textarea name="reason" id="reason" required></textarea>
+				</li>
+				</ul>
 			</fieldset>
 
 			<fieldset>
-				<legend>Verification</legend>
+				<h3>Verification</h3>
 
-				<p>To ensure only qualified people apply, enter your pre-assigned unique vigilante invite code blow.</p>
+				<p>To ensure only qualified people apply, enter your pre-assigned unique vigilante invite code below.</p>
 
 				<label for="code">Vigilante Code</label>
-				<input type="text" name="code" id="code" />
+				<input type="text" name="code" id="code" required required pattern="^[a-zA-Z0-9]{7,10}$" />
 			</fieldset>
 
 			<button type="submit" id="submit">Submit Application</button>
 		</form>
+	</section>
+	<section id="locationWrapper">
+		<header>
+			<h1>Your Location</h1>
+		</header>
+		<section id="map" style="width: 250px; height: 200px;"></section>
 	</section>
 	<footer>
 		&copy;2012 Vigilante Services Inc.
@@ -102,9 +163,81 @@
 <![endif]-->
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
+
 
 <script type="text/javascript">
-	// put your javascript here!
+
+/*--------------------------GeoLocation Bits!------------------------------------*/
+	var map;
+	var glatlng;
+	function found(position) {
+		console.log(position);
+	
+			glatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+			var map_options = {
+				zoom: 14,
+				center: glatlng,
+				mapTypeControl: false,
+				navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+
+			map = new google.maps.Map($('#map')[0], map_options);
+
+			var marker = new google.maps.Marker({
+				position: glatlng,
+				map: map,
+				title: "It's a you! (Accurate to " + position.coords.accuracy + " meters)"
+			});
+		}
+
+	function not_found(position) {
+		console.log(error);
+	}
+
+	$(document).ready(function() {
+	
+	/*-------------------Put a Map on it!---------------------------*/
+	
+	if (navigator.geolocation) {
+		var geo_options = {
+			enableHighAccuracy: true,
+			timeout: 2000,
+			maximumAge: 5000
+		};
+		navigator.geolocation.getCurrentPosition(found, not_found, geo_options);
+	}
+	
+	/*-------------------LocalStorage Bits!------------------------------*/
+	
+	//form inputs
+	var name_input = $('#vigilantename');
+	var age_input = $('#age');
+	var email_input = $('#email');
+	var dayjob_input = $('#dayjob');
+	var startdate_input = $('#startdate');
+	var blogurl_input = $('#blogurl');
+	
+	// object to hold vigilante data
+	var vigilante = null;
+	
+	// check for stored vigilante data
+	var stored_vigilante = store.get('vigilante');
+	
+	// update vigilante object in local storage and spit out debug info
+	function update_vigilante() {
+		store.set('vigilante', vigilante);
+		
+		var sv = store.get('vigilante');
+		
+		debug.html(JSON.stringify(sv)); // we have to stringify here cause store.js parsed it already
+	}
+	
+	
+	
+	});
 </script>
 
 </body>
